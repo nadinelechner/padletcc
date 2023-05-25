@@ -1,0 +1,12 @@
+<div class="content">
+  <div class="header">
+    {{padlet?.name}}
+    <div class="description">{{padlet?.erstellungsdatum | date: 'longDate'}}</div>
+    <div class="metadata">
+      <p>{{padlet?.users}}</p>
+          <span *ngFor="let user of padlet?.users; last as l">
+            {{user}}<span *ngIf="!l">, </span>
+          </span>
+    </div>
+  </div>
+</div>

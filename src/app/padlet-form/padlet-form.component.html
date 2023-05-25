@@ -1,0 +1,42 @@
+<h1>Scheinbar möchtest du ein neues Padlet hinzufügen, bzw ein bestehendes bearbeiten. Here we go:</h1>
+<form class="ui large form" [formGroup]="padletForm" (ngSubmit)="submitForm()">
+  <input type="hidden" formControlName="id">
+  <div class="field">
+    <label>Gib deinem Padlet einen (anderen) Namen:</label>
+    <input formControlName="name">
+    <!--div soll nur angezeigt werden, wenn name nicht gscheid eingeben wird und die Validatoren greifen-->
+    <div *ngIf="errors['name']" class="ui negative message">{{errors['name']}}</div>
+  </div>
+
+  <div class="field">
+    <label>Soll dein Padlet nur für dich sichtbar sein oder für alle? false: öffentlich, true: privat</label>
+    <input formControlName="isprivate">
+    <!--div soll nur angezeigt werden, wenn name nicht gscheid eingeben wird und die Validatoren greifen-->
+    <div *ngIf="errors['isprivate']" class="ui negative message">{{errors['isprivate']}}</div>
+  </div>
+
+  <div class="field">
+    <label>Erstellungsdatum</label>
+    <input formControlName="erstellungsdatum" type="date">
+    <!--div soll nur angezeigt werden, wenn name nicht gscheid eingeben wird und die Validatoren greifen-->
+    <div *ngIf="errors['erstellungsdatum']" class="ui negative message">{{errors['erstellungsdatum']}}</div>
+  </div>
+
+  <div class="field">
+    <label>Hier kannst du gleich Texteinträge zu deinem Padlet hinzufügen.</label>
+    <div formArrayName="eintrags">
+      <div class="fields" *ngFor="let control of eintrags?.controls; index as i; last as l"
+           [formGroupName]="i">
+        <input type="hidden" formControlName="id">
+        <div class="nine wide field">
+          <input formControlName="text" placeholder="Hier könnte dein Texteintrag stehen...">
+        </div>
+        <div class="one wide field" *ngIf="1">
+          <button (click)="addEintragControl()" class="ui large button" type="button">+</button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="errors['eintrags']" class="ui negative message">{{errors['eintrags']}}</div>
+  </div>
+  <button type="submit" class="ui button" [disabled]="padletForm.invalid">Speichere bitte mein Padlet und die Einträge</button>
+</form>
