@@ -22,11 +22,13 @@ export class EintragDetailComponent implements OnInit{
   }
 
   ngOnInit() {
+    //damit holen wir uns die id aus der URL
     let url = this.router.url;
     let url_list = url.split('/');
     let padlet_id = url_list[2];
     let eintrag_id = url_list[4];
 
+    //Problem???
     this.bs.getSingleEintrag(Number(padlet_id), Number(eintrag_id)).subscribe(
       (e:Eintrag)=>this.eintrag=e
     );

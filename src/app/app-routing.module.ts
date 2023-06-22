@@ -20,8 +20,8 @@ const routes: Routes = [
   {path: 'padlets/:id/eintrag/:eintrag_id', component: EintragDetailComponent},
   {path: 'padletbearbeiten', component: PadletFormComponent}, //canActivate:[CanNavigateToAdminGuard]},
   {path: 'padletbearbeiten/:id', component: PadletFormComponent}, //canActivate:[CanNavigateToAdminGuard]},
-  {path: 'eintragbearbeiten/:eintrag_id', component: EintragFormComponent},
-  {path: 'eintragerstellen', component: EintragFormComponent},
+  {path: 'padlets/:id/eintragbearbeiten/:eintrag_id', component: EintragFormComponent},
+  {path: 'padlets/:id/eintragerstellen', component: EintragFormComponent},
   {path: 'login', component: LoginComponent}
 
 ];

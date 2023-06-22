@@ -39,19 +39,20 @@ export class EintragFormComponent{
     //entweder es kommt eine ID mit, oder nicht
     let url = this.router.url;
     let url_list = url.split('/');
-    let action = url_list[1];
-    let eintrag_id = url_list[2];
-
-    console.log(action);
-    console.log(eintrag_id);
+    let action = url_list[3];
 
 
     //funzt nicht, weil getSingleEintrag zwei Parameter erwartet??
-
+//auskommentieren = PROBLEM
     if(action == "eintragbearbeiten") {
       //edit
+      let url = this.router.url;
+      let url_list = url.split('/');
+      let eintrag_id = url_list[4];
+      let padlet_id = url_list[2];
+
       this.isUpdatingEintrag = true;
-      this.bs.getSingleEintrag(Number(eintrag_id)).subscribe(eintrag => {
+      this.bs.getSingleEintrag(Number(padlet_id), Number(eintrag_id)).subscribe(eintrag => {
         this.eintrag = eintrag;
         this.initEintrag();
       })
@@ -98,7 +99,7 @@ export class EintragFormComponent{
 
     if(this.isUpdatingEintrag){
       this.bs.updateEintrag(eintrag).subscribe(res => {
-        this.router.navigate(["../../padlets", eintrag.padlet_id], {
+        this.router.navigate(["../../"], {
           relativeTo: this.route
         });
       });
@@ -113,7 +114,9 @@ export class EintragFormComponent{
       this.bs.createEintrag(Number(padlet_id), eintrag).subscribe(res => {
         this.eintrag = EintragFactory.empty();
         this.eintragForm.reset(EintragFactory.empty());
-        this.router.navigate(["../eintrags"], {relativeTo: this.route});
+
+
+        this.router.navigate(["../"], {relativeTo: this.route});
       });
     }
   }

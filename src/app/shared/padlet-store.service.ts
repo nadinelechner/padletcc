@@ -55,6 +55,9 @@ export class PadletStoreService {
       .pipe(retry(3)).pipe(catchError(this.errorHandler))
   }
 
+  //funktionen fürs eintrags-formular
+
+//Problem??
   getSingleEintrag(padlet_id:number, eintrag_id:number) : Observable<Eintrag>{
     return this.http.get<Eintrag>(`${this.api}/padlet/${padlet_id}/eintrag/${eintrag_id}`)
       .pipe(retry(3)).pipe(catchError(this.errorHandler))
