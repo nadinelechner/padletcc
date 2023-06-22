@@ -1,10 +1,19 @@
 import {Padlet} from "./padlet";
 import {Eintrag, Kommentar, Rating} from "./eintrag";
+import {User} from "./user";
+
+
+//für REST!! - leere Padlets für Umwandeln von JSON Objekte
+//kann versch. Datentypen behandeln
+//Zustandslosigkeit: sErver speichert nämlich keine Infos über Zustand vom Client
+
 
 export class PadletFactory {
   static empty():Padlet {
     return new Padlet(0, '', new Date(), false,
-      [{id:0, name:'', email:'', password:''}],
+      0,
+      [new User(
+        0, '', '', '')],
       [new Eintrag(
         0, '', 0, 0,
         [new Rating (0,0,0,0)],
@@ -12,7 +21,8 @@ export class PadletFactory {
       ], );
   }
 
-  static fromObject(rawPadlet:any): Padlet {
+
+  static fromObject(rawPadlet: any): Padlet {
     const eintrags: Eintrag[] = rawPadlet.eintrags?.map((rawEintrag: any) => {
       return new Eintrag(
         rawEintrag.id,
@@ -23,13 +33,16 @@ export class PadletFactory {
         rawEintrag.ratings?.map((rawRating: any) => new Rating(0,0,0,0))
       );
     });
+
     return new Padlet(
       rawPadlet.id,
       rawPadlet.name,
       typeof(rawPadlet.erstellungsdatum)==='string'? new Date(rawPadlet.erstellungsdatum):rawPadlet.erstellungsdatum,
       rawPadlet.isprivate,
+      rawPadlet.user_id,
       rawPadlet.users,
       eintrags,
+      //eintrags war vorher ohne rawPadlet?
     );
   }
 }

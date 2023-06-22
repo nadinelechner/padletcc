@@ -1,6 +1,6 @@
 //Fehlermeldung bei Routenfindung
 
-/*import { Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import jwt_decode from "jwt-decode";
 
@@ -62,5 +62,5 @@ export class AuthenticationService {
   isLoggedOut() {
     return !this.isLoggedIn();
   }
-}*/
+}
 

@@ -1,11 +1,10 @@
 <!--Home-Menü - achtung: keine hrefs!-->
 
-<div class="ui three item tabs menu">
+<div class="ui four item tabs menu">
   <a routerLink="home" routerLinkActive="active" class="item">Home</a>
   <a routerLink="padlets" routerLinkActive="active" class="item">Alle Padlets ansehen</a>
   <a routerLink="padletbearbeiten" routerLinkActive="active" class="item">Padlet hinzufügen</a>
-  <!--<a *ngIf="isLoggedIn()" routerLink="admin" routerLinkActive="active" class="item">Login(Administration)</a>
-  <a routerLink="login" routerLinkActive="active" class="item">{{getLoginLabel()}}</a>-->
+  <a routerLink="login" routerLinkActive="active" class="item">{{getLoginLabel()}}</a>
 </div>
 
 <router-outlet> </router-outlet>

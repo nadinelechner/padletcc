@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Eintrag, Padlet} from "../shared/padlet";
 import {PadletStoreService} from "../shared/padlet-store.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -16,7 +16,7 @@ import {EintragFactory} from "../shared/eintrag-factory";
 export class PadletDetailsComponent implements OnInit {
   //brauchts mitn Routing auch nicht mehr
   //über den parameternamen padlet bekommst du das Padlet
-  //@Input() padlet:Padlet | undefined;
+   //@Input() padlet:Padlet | undefined;
   //Events
   //@Output() showListEvent = new EventEmitter<any>();
   //showPadletList() {
@@ -34,12 +34,18 @@ export class PadletDetailsComponent implements OnInit {
   ngOnInit() {
     //Auslesen des Parameters aus der Route
     const params = this.route.snapshot.params;
+    console.log(params);
     this.bs.getSingle(params['id']).subscribe(
-      (p: Padlet) => this.padlet = p
+      (p: Padlet) => {
+        this.padlet = p;
+        console.log(this.padlet);
+      }
     );
-    //console.log(this.padlet);
+    console.log(this.padlet);
   }
 
+  //remove ist im padlet-store-service
+  //remove ist im padlet-store-service
   removePadlet() {
     if (confirm('Willst du das Padlet wirklich löschen?')) {
       this.bs.remove(this.padlet?.id).subscribe(

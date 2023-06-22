@@ -8,6 +8,7 @@ import {EintragFactory} from "../shared/eintrag-factory";
 import {EintragStoreService} from "../shared/eintrag-store.service";
 import {Eintrag} from "../shared/eintrag";
 
+
 @Component({
   selector: 'bs-eintrag-form',
   templateUrl: './eintrag-form.component.html',
@@ -33,14 +34,24 @@ export class EintragFormComponent{
     this.kommentars = this.fb.array([]);
   }
 
-  ngOnInit(){
+  ngOnInit() {
     //Entscheiden, ob neuer Eintrag angelegt werden soll oder bestehender editiert werden soll
     //entweder es kommt eine ID mit, oder nicht
-    const id = this.route.snapshot.params["id"];
-    if(id){
+    let url = this.router.url;
+    let url_list = url.split('/');
+    let action = url_list[1];
+    let eintrag_id = url_list[2];
+
+    console.log(action);
+    console.log(eintrag_id);
+
+
+    //funzt nicht, weil getSingleEintrag zwei Parameter erwartet??
+
+    if(action == "eintragbearbeiten") {
       //edit
       this.isUpdatingEintrag = true;
-      this.bs.getSingleEintrag(id).subscribe(eintrag => {
+      this.bs.getSingleEintrag(Number(eintrag_id)).subscribe(eintrag => {
         this.eintrag = eintrag;
         this.initEintrag();
       })
@@ -50,8 +61,6 @@ export class EintragFormComponent{
 
   //in form-html geben wir formControlName=name an und name ist hier der Schlüssel dazu
   initEintrag(){
-    this.buildRatingsArray();
-    this.buildKommentarsArray();
     this.eintragForm = this.fb.group({
       id: this.eintrag.id,
       text: this.eintrag.text,
@@ -61,43 +70,6 @@ export class EintragFormComponent{
 
     this.eintragForm.statusChanges.subscribe(
     )
-  }
-
-  buildRatingsArray(){
-    if(this.eintrag.ratings){
-      this.ratings = this.fb.array([]);
-      for(let ein of this.eintrag.ratings){
-        let fg = this.fb.group({
-          id: ein.id,
-          rating: ein.rating
-        });
-        this.ratings.push(fg);
-      }
-    }
-  }
-
-  buildKommentarsArray(){
-    if(this.eintrag.kommentars){
-      this.kommentars = this.fb.array([]);
-      for(let ein of this.eintrag.kommentars){
-        let fg = this.fb.group({
-          id: ein.id,
-          text: ein.text
-        });
-        this.kommentars.push(fg);
-      }
-    }
-  }
-
-
-  //beim Formular Rating hinzufügen
-  addRatingControl(){
-    this.ratings.push(this.fb.group({id:0,rating:0}));
-  }
-
-  //beim Formular Kommentar hinzufügen
-  addKommentarControl(){
-    this.kommentars.push(this.fb.group({id:0,kommentar:null}));
   }
 
   /*updateErrorMessages(){
@@ -115,15 +87,12 @@ export class EintragFormComponent{
   }*/
 
   submitForm(){
+    let url = this.router.url;
+    let url_list = url.split('/');
+    const padlet_id = url_list[2];
 
-    //Filter: leert Daten
-    this.eintragForm.value.kommentars = this.eintragForm.value.kommentars.filter(
-      (kommentar: {text: string;}) => kommentar.text
-    );
-
-    this.eintragForm.value.ratings = this.eintragForm.value.ratings.filter(
-      (rating: {rating: number;}) => rating.rating
-    );
+    console.log("padletid");
+    console.log(padlet_id);
 
     const eintrag: Eintrag = EintragFactory.fromObject(this.eintragForm.value);
 
@@ -134,8 +103,14 @@ export class EintragFormComponent{
         });
       });
     } else {
+      console.log("Eintrag");
       console.log(eintrag);
-      this.bs.createEintrag(eintrag).subscribe(res => {
+      this.eintrag.user_id = 1;
+
+      console.log("padletid");
+      console.log(padlet_id);
+
+      this.bs.createEintrag(Number(padlet_id), eintrag).subscribe(res => {
         this.eintrag = EintragFactory.empty();
         this.eintragForm.reset(EintragFactory.empty());
         this.router.navigate(["../eintrags"], {relativeTo: this.route});

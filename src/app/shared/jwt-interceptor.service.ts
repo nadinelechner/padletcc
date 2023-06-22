@@ -1,6 +1,8 @@
 //Fehlermeldung bei Routenfindung
+//jSon web token: ermöglicht überlagerung von authdaten zw client & server
+//geht auch mit Cookies: speichern informationen am server
 
-/*import {
+import {
   HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest,
   HttpResponse
 } from "@angular/common/http";
@@ -27,4 +29,4 @@ export class JwtInterceptorService
       }
     }));
   }
-}*/
+}

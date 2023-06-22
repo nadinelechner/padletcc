@@ -1,12 +1,23 @@
 <div class="content">
   <div class="header">
     {{padlet?.name}}
-    <div class="description">{{padlet?.erstellungsdatum | date: 'longDate'}}</div>
-    <div class="metadata">
-      <p>{{padlet?.users}}</p>
+    <div class="description">Erstellungsdatum: {{padlet?.erstellungsdatum | date: 'longDate'}}</div>
+    <!--<div class="metadata">
+
+      <p>{{padlet?.users}}, User ID:{{padlet?.user_id}}</p>
+      <span>{{eintrag?.id}}</span>
+
           <span *ngFor="let user of padlet?.users; last as l">
-            {{user}}<span *ngIf="!l">, </span>
+            {{user?.name}} {{user?.email}} <span *ngIf="!l">,</span>
           </span>
-    </div>
+
+      <div
+        class="ui card item bs-entry-list-item"
+        *ngFor="let use of padlet?.users">{{user?.id}}
+        <br>
+        <div>{{user?.email}}</div>
+      </div>
+
+    </div>-->
   </div>
 </div>

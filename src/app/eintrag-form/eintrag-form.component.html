@@ -1,4 +1,4 @@
-<!--Formular zum Erstellen von Einträgen, sowie Kommentare und Ratings dazu-->
+<!--Formular zum Erstellen von Einträgen-->
 <h1>Eintrag hinzufügen</h1>
 <form class="ui large form" [formGroup]="eintragForm" (ngSubmit)="submitForm()">
   <input type="hidden" formControlName="id">
@@ -7,57 +7,6 @@
     <input formControlName="text" placeholder="hier könnte deine Werbung stehen">
   </div>
 
-  <div class="field">
-    <label>Erstellt von User (user_id bitte eingeben)</label>
-    <input type="number" formControlName="user_id">
-  </div>
-  <div class="field">
-    <label>Gehört zu Padlet (padlet_id bitte eingeben)</label>
-    <input type="number" formControlName="padlet_id">
-  </div>
-
-  <div class="field">
-    <label>Rating zu einem Eintrag (1-5, wobei 1 für sehr schlecht und 5 für sehr gut steht)</label>
-    <div formArrayName="eintrags">
-      <div class="fields" *ngFor="let control of ratings?.controls; index as i; last as l"
-           [formGroupName]="i">
-        <input type="hidden" formControlName="id">
-        <div class="nine wide field">
-          <input formControlName="number">
-        </div>
-        <div class="field">
-          <label>Erstellt von User (user_id bitte angeben)</label>
-          <input formControlName="user_id">
-        </div>
-        <div class="one wide field" *ngIf="l">
-          <button (click)="addRatingControl()" class="ui large button">+</button>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="errors['eintrags']" class="ui negative message">{{errors['eintrags']}}</div>
-  </div>
-
-  <div class="field">
-    <label>Kommentare zu einem Eintrag</label>
-    <div formArrayName="eintrags">
-      <div class="fields" *ngFor="let control of kommentars?.controls; index as i; last as l"
-           [formGroupName]="i">
-        <input type="hidden" formControlName="id">
-        <div class="nine wide field">
-          <input formControlName="text">
-        </div>
-        <div class="field">
-          <label>Erstellt von User (user_id bitte angeben)</label>
-          <input formControlName="user_id">
-        </div>
-        <div class="one wide field" *ngIf="l">
-          <button (click)="addKommentarControl()" class="ui large button">+</button>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="errors['eintrags']" class="ui negative message">{{errors['eintrags']}}</div>
-  </div>
-
-  <button type="submit" class="ui button" [disabled]="eintragForm.invalid">Eintrag, sowie mögliche Ratings und Kommentare speichern</button>
+  <button type="submit" class="ui button" [disabled]="eintragForm.invalid">Eintrag speichern</button>
 
 </form>

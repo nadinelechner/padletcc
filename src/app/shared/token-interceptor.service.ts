@@ -1,6 +1,6 @@
 //Fehlermeldung bei Routenfindung
 
-/*import {Injectable} from "@angular/core";
+import {Injectable} from "@angular/core";
 
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from
     "@angular/common/http";
@@ -15,4 +15,4 @@ export class TokenInterceptorService implements HttpInterceptor {
     });
     return next.handle(request);
   }
-}*/
+}

@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {PadletFormErrorMessages} from "./padlet-form-error-messages";
 import {Padlet} from "../shared/padlet";
 
+
 @Component({
   selector: 'bs-padlet-form',
   templateUrl: './padlet-form.component.html',
@@ -98,7 +99,6 @@ export class PadletFormComponent implements OnInit{
     const padlet: Padlet = PadletFactory.fromObject(this.padletForm.value);
     //user einfach kopieren
     padlet.users = this.padlet.users;
-
     if (this.isUpdatingPadlet) {
       this.bs.update(padlet).subscribe(res => {
         this.router.navigate(["../../padlets", padlet.id], {
@@ -108,6 +108,7 @@ export class PadletFormComponent implements OnInit{
     } else {
       console.log(padlet);
       this.bs.create(padlet).subscribe( res => {
+        console.log(res);
         this.padlet = PadletFactory.empty();
         this.padletForm.reset(PadletFactory.empty());
         this.router.navigate(["../padlets"], {relativeTo: this.route});

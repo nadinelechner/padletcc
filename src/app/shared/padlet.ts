@@ -10,6 +10,7 @@ export class Padlet {
               public name:string,
               public erstellungsdatum:Date,
               public isprivate:boolean,
+              public user_id:number,
               public users?: User[],
               public eintrags?: Eintrag[],
               ) {

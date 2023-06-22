@@ -14,9 +14,8 @@ export class PadletListComponent implements OnInit {
   //schickt die Daten wieder weg, wenn es das Event verlangt
   //@Output() showDetailsEvent = new EventEmitter<Padlet>();
 
-  //wir rufen Padlets auf
-  constructor(private bs:PadletStoreService) {
-  }
+  //wir rufen Padlets auf über PadletStoreService
+  constructor(private bs:PadletStoreService) {}
 
   //showDetails(padlet: Padlet){
     //this.showDetailsEvent.emit(padlet);
@@ -29,9 +28,11 @@ export class PadletListComponent implements OnInit {
   //und weisen das denn padlets zu
   //das ist asynchron
   ngOnInit() {
-    this.bs.getAll().subscribe(
-    res => this.padlets = res
-    );
+    this.bs.getAll().subscribe(res => {
+      this.padlets = res;
+      console.log(this.padlets);
+    });
+    console.log(this.padlets);
   }
 }
 

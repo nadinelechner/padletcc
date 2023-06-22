@@ -1,3 +1,8 @@
+<!--
+ formControlName: formcontrol in template an formcontrol-instanz binden
+ formcontrol: einzelen formcontrolle enthält Wert, Validierung
+ formgroup: repräsentiert gruppe von formcontrols-->
+
 <h1>Scheinbar möchtest du ein neues Padlet hinzufügen, bzw ein bestehendes bearbeiten. Here we go:</h1>
 <form class="ui large form" [formGroup]="padletForm" (ngSubmit)="submitForm()">
   <input type="hidden" formControlName="id">

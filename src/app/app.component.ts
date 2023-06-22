@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-//import {AuthenticationService} from "./shared/authentication.service";
+import {AuthenticationService} from "./shared/authentication.service";
 import {Padlet} from "./shared/padlet";
 
 @Component({
@@ -16,7 +16,7 @@ import {Padlet} from "./shared/padlet";
 
 export class AppComponent {
 
-  /*constructor(private authService: AuthenticationService) { }
+  constructor(private authService: AuthenticationService) { }
   isLoggedIn() {
     return this.authService.isLoggedIn();
   }
@@ -26,7 +26,7 @@ export class AppComponent {
     } else {
       return "Login";
     }
-  }*/
+  }
 
   //brauchts nimma wegen Routing
   /*list ist auf true also soll angezeigt werden und detail nicht, wäre beides auf true

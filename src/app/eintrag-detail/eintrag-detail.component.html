@@ -1,0 +1,17 @@
+<div class="ui grid">
+
+  <div class="twelve wide column">
+<h2>Eintrag:</h2>
+    <p class="ui header">{{eintrag.text}}</p>
+<br>
+
+  </div>
+
+</div>
+
+
+<button class="ui tiny red labeled icon button" (click)="removeEintrag()">
+  <i class="remove icon"></i>Eintrag löschen</button>
+
+<a class="ui tiny yellow labeled icon button" [routerLink]="['../../eintragbearbeiten',eintrag.id]"><i class="write icon">
+</i>Eintrag bearbeiten</a>

@@ -14,14 +14,16 @@ import {ToastrModule} from "ngx-toastr";
 import {PadletFormComponent} from './padlet-form/padlet-form.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {EintragFormComponent} from './eintrag-form/eintrag-form.component';
-//import { LoginComponent } from './login/login.component';
-//import {AuthenticationService} from "./shared/authentication.service";
-//import {TokenInterceptorService} from "./shared/token-interceptor.service";
-//import {JwtInterceptorService} from "./shared/jwt-interceptor.service";
+import { LoginComponent } from './login/login.component';
+import {AuthenticationService} from "./shared/authentication.service";
+import {TokenInterceptorService} from "./shared/token-interceptor.service";
+import {JwtInterceptorService} from "./shared/jwt-interceptor.service";
+import { EintragDetailComponent } from './eintrag-detail/eintrag-detail.component';
 
 
 @NgModule({
   declarations: [
+    //start: app.component
     AppComponent,
     PadletListComponent,
     PadletListItemComponent,
@@ -29,20 +31,22 @@ import {EintragFormComponent} from './eintrag-form/eintrag-form.component';
     HomeComponent,
     PadletFormComponent,
     EintragFormComponent,
-    //LoginComponent,
+    LoginComponent,
+    EintragDetailComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule,
     ToastrModule.forRoot(), ReactiveFormsModule
   ],
-  providers: [PadletStoreService],//AuthenticationService, {
-   /* provide: HTTP_INTERCEPTORS,
+  providers: [PadletStoreService, AuthenticationService,
+  {
+   provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true
    }, {provide: HTTP_INTERCEPTORS,
   useClass: JwtInterceptorService,
   multi: true}
-  ],*/
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

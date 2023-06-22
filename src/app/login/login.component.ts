@@ -1,11 +1,11 @@
 //Fehlermeldung bei Routenfindung
 
-/*import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../shared/authentication.service";
 interface Response {
-  access_token: string;
+access_token: string;
 }
 @Component({
   selector: "bs-login",
@@ -42,5 +42,5 @@ export class LoginComponent implements OnInit {
   logout() {
     this.authService.logout();
   }
-}*/
+}
 
